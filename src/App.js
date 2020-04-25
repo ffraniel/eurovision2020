@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import Home from './Pages/Home';
+const Rank = lazy(() => import('./Pages/Rank'));
+const Artists = lazy(() => import('./Pages/Artists'));
+const Game = lazy(() => import('./Pages/Game'));
+
 function App() {
+
   return (
-    <div className="container mx-auto">
-      <div className="m-10 max-w-sm rounded overflow-hidden shadow-lg">
-        <img className="w-full" src={require('./profile.jpg')} alt="Display" />
-        <div className="px-4 py-4">
-          <div className="font-bold text-purple-500 text-xl mb-2">
-            Blessing Krofegha
-          </div>
-          <p className="text-gray-700 text-base">
-            When i’m not coding i switch to netflix with biscuits and cold tea as my companion. <span></span>😜
-          </p>
-        </div>
-        <div className="px-4 py-1 pb-8">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-2">#Software Engineer</span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-2">#Writter</span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-2">#Public Speaker</span>
-        </div>
-      </div>
-    </div>
+    <Suspense fallback={'<h1>LOADING!!!!!</h1>'}>
+      <Router className="">
+        <header className="text-center mt-6 mb-6" >
+          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/">Home</NavLink>
+          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/artists">Artists</NavLink>
+          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/rank">Rank</NavLink>
+          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/game">Game</NavLink>
+        </header>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/artists">
+            <Artists />
+          </Route>
+          <Route path="/rank">
+            <Rank />
+          </Route>
+          <Route path="/game">
+            <Game />
+          </Route>
+        </Switch>
+      </Router>
+    </Suspense>
   );
 }
 export default App;
