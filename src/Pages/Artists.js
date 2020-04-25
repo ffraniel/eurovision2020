@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ArtistFrontPage from '../Components/ArtistFrontPage';
 import musicData from '../data/lyricsJson.json';
-import randomise from '../Utility/randomise';
+import shuffle from '../Utility/shuffle';
 
 const Artists = () => {
   
@@ -9,10 +9,9 @@ const Artists = () => {
   const [currentPosition, setCurrentPosition] = useState(0);
 
   useEffect(()=>{
-    let randomisedData = randomise(musicData);
-    console.log("warning: we just re-randomised - expect duplicates");
+    let randomisedData = shuffle(musicData);
     setData(randomisedData);
-  }, [data]);
+  }, []);
 
   const artistBack = (e) => {
     e.preventDefault();
