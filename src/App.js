@@ -13,6 +13,7 @@ function App() {
   const [points, setPoints] = useState(null);
   const [avgScore, setAvgScore] = useState([]);
   const [topScore, setTopScore] = useState(null);
+  const [allScores, setAllScores] = useState(null);
 
   useEffect(() => {
     if (storage.getItem('ID')) {
@@ -28,11 +29,13 @@ function App() {
       }
       const topScoreLS = JSON.parse(storage.getItem('topScore'));
       const avgScoreLS = JSON.parse(storage.getItem('avgScore'));
+      const allScoresLS = JSON.parse(storage.getItem('allScores'));
       
       setUserID(IDLS);
       setPoints(pointsLS);
       setTopScore(topScoreLS);
       setAvgScore(avgScoreLS);
+      setAllScores(allScoresLS);
 
     } else {
       // create uuid, set to user, give user state all votes and access
@@ -46,6 +49,7 @@ function App() {
         two: null
       });
       setTopScore([]);
+      setAllScores([]);
       setAvgScore(null);
     }
   }, [storage]);
@@ -69,8 +73,10 @@ function App() {
       storage.setItem('points2', JSON.stringify(two));
       // topScore
       storage.setItem('topScore', JSON.stringify(topScore));
-      // AvgScore
+      // avgScore
       storage.setItem('avgScore', JSON.stringify(avgScore));
+      // allScores
+      storage.setItem('allScores', JSON.stringify([]));
     }
   });
 
@@ -91,10 +97,17 @@ function App() {
             <Artists />
           </Route>
           <Route path="/rank">
-            <Rank />
+            <Rank avgScore={avgScore} topScore={topScore} />
           </Route>
           <Route path="/game">
-            <Game />
+            <Game 
+              avgScore={avgScore} 
+              setAvgScore={setAvgScore}
+              topScore={topScore}     
+              setTopScore={setTopScore}
+              allScores={allScores}
+              setAllScores={setAllScores}
+            />
           </Route>
         </Switch>
       </Router>
