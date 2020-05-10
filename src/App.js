@@ -1,7 +1,8 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Home from './Pages/Home';
+import SiteLinks from './Components/SiteLinks';
 const Rank = lazy(() => import('./Pages/Rank'));
 const Artists = lazy(() => import('./Pages/Artists'));
 const Game = lazy(() => import('./Pages/Game'));
@@ -84,10 +85,10 @@ function App() {
     <Suspense fallback={'<h1>LOADING!!!!!</h1>'}>
       <Router className="">
         <header className="text-center mt-6 mb-6" >
-          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/">Home</NavLink>
-          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/artists">Artists</NavLink>
-          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/rank">Rank</NavLink>
-          <NavLink className="bg-green-900 rounded-xl text-white py-1 px-4 m-2" to="/game">Game</NavLink>
+          <SiteLinks toAddress={"/"} description={"Home"} />
+          <SiteLinks toAddress={"/artists"} description={"Artists"} />
+          <SiteLinks toAddress={"/rank"} description={"Rank"} />
+          <SiteLinks toAddress={"/game"} description={"Game"} />
         </header>
         <Switch>
           <Route path="/" exact>
@@ -108,6 +109,9 @@ function App() {
               allScores={allScores}
               setAllScores={setAllScores}
             />
+          </Route>
+          <Route noMatch>
+            <h1>404 sorry can't find that, try refreshing your page</h1>
           </Route>
         </Switch>
       </Router>
