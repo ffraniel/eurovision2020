@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ArtistFrontPage from "../Components/ArtistFrontPage";
+import Loading from "../Components/Loading";
+import Images from "../Components/Images";
 import musicData from "../data/lyricsJson.json";
 import shuffle from "../Utility/shuffle";
 
 const Artists = () => {
   const [data, setData] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(0);
-  const [isShowingAll, setIsShowingAll] = useState(true);
+  const [isShowingAll, setIsShowingAll] = useState(false);
 
   useEffect(() => {
     let randomisedData = shuffle(musicData);
@@ -56,7 +58,7 @@ const Artists = () => {
         </button>
       </div>
 
-      {isShowingAll && !data && <h1>Loading</h1>}
+      {isShowingAll && !data && <Loading />}
       {isShowingAll && musicData && (
         <div className="text-center m-2 mx-auto max-w-4xl font-rubik font-normal border">
           <h3>Artists</h3>
@@ -83,8 +85,14 @@ const Artists = () => {
                   } hover:bg-red-300`}
                 >
                   <div>
-                    <img src={entry.artistImg} alt={entry.artist} />
-                    <img src={entry.lilFlag} alt={entry.country} />
+                    <div className="inline-block mx-auto mx-w-md">
+                      <Images
+                        classNames={"object-cover h-24 w-32"}
+                        src={entry.artistImg}
+                        alt={entry.artist}
+                      />
+                    </div>
+                    <Images src={entry.lilFlag} alt={entry.country} />
                     <h4>{entry.country}</h4>
                   </div>
                   <div>

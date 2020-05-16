@@ -1,5 +1,5 @@
 import React from "react";
-
+import Images from "./Images";
 const Answer = ({
   round,
   setRound,
@@ -35,11 +35,13 @@ const Answer = ({
           </h1>
         </>
       )}
-      <img
-        className="inline-block mx-auto mx-w-md"
-        src={gameSongs[round].artistImg}
-        alt={gameSongs[round].artist}
-      />
+      <div className="inline-block mx-auto mx-w-md">
+        <Images
+          classNames={"object-cover h-48 w-64"}
+          src={gameSongs[round].artistImg}
+          alt={gameSongs[round].artist}
+        />
+      </div>
       <h3>
         The Song was {gameSongs[round].songName} by {gameSongs[round].artist}
       </h3>

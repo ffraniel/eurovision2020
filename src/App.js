@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Home from "./Pages/Home";
 import SiteLinks from "./Components/SiteLinks";
+import Loading from "./Components/Loading";
 const Vote = lazy(() => import("./Pages/Vote"));
 const Artists = lazy(() => import("./Pages/Artists"));
 const Game = lazy(() => import("./Pages/Game"));
@@ -73,7 +74,7 @@ function App() {
   });
 
   return (
-    <Suspense fallback={"<h1>LOADING!!!!!</h1>"}>
+    <Suspense fallback={<Loading />}>
       <Router className="">
         <header className="text-center mt-6 mb-6">
           <SiteLinks toAddress={"/"} description={"Home"} />

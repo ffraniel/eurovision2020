@@ -63,7 +63,7 @@ const Question = ({
     <div className="p-6">
       <h3 className="block">Name the country from the words!</h3>
       {speechSynthesis && (
-        <section className="m-2 bg-yellow-200 p-4">
+        <section className="m-2 p-4">
           <button
             className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 m-2 rounded"
             onClick={() => {
@@ -93,6 +93,7 @@ const Question = ({
               key={option.country}
               onClick={e => {
                 e.preventDefault();
+                stopSpeaking();
                 handleAnswer(option.country);
               }}
             >

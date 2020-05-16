@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VideoPlayer from "./VideoPlayer";
+import Images from "../Components/Images";
 
 const Artist = ({ artist }) => {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -36,8 +37,8 @@ const Artist = ({ artist }) => {
   return (
     <div className="">
       <div className="relative p-2">
-        <img
-          className="rounded-lg overflow-hidden"
+        <Images
+          classNames={"rounded-lg overflow-hidden"}
           src={artist.artistImg}
           alt={artist.artist}
         />
@@ -47,8 +48,8 @@ const Artist = ({ artist }) => {
         >
           Youtube
         </button>
-        <img
-          className="absolute w-16 right-0 bottom-0 p-4"
+        <Images
+          classNames={"absolute w-16 right-0 bottom-0 p-4"}
           src={artist.lilFlag}
           alt={`flag of ${artist.country}`}
         />
